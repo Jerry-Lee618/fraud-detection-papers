@@ -34,6 +34,15 @@
 * [Detecting Click Fraud in Online Advertising: A Data Mining Approach](/papers/JMLR'13.pdf) by Richard Oentaryo et al. JMLR 2014.
 * [Feature Engineering for Click Fraud Detection](http://research.larc.smu.edu.sg/fdma2012/doc/FirstWinner-Starrystarrynight-Paper.pdf) by Clifton Phua et al. International Workshop on Fraud Detection in Mobile Advertising (FDMA) 2012.
 * [A Novel Approach Based on Ensemble Learning for Fraud Detection in Mobile Advertising](http://research.larc.smu.edu.sg/fdma2012/doc/SecondWinner-TeamMasdar-Paper.pdf) by Kasun S. Perera et al. International Workshop on Fraud Detection in Mobile Advertising (FDMA) 2012.
+
+	1. 特征抽取: 借鉴了Google AdSense反作弊的一些特征, 同时也参考了传统反作弊系统的一些研究成果, 因为移动广告反作弊还处于新兴阶段.
+		1. 时间特征: 作弊方经常使用多种技巧隐藏自己的活动, 例如生成非常稀疏的点击序列, 改变IP地址, 从不同国家的计算机发出点击等等; 还有一些是坚持使用传统方法, 即只在给定时间间隔内产生最大点击次数. 反作弊系统需要识别出这两种方式. 作者选择1 min, 5 min, 1 hours, 3hours and 6 hours的时间间隔, 来统计他们的点击次数, 并综合所有的时间间隔的数据, 统计平均值, 最大值, 方差以及偏度作为特征.
+		2. IP特征: 构造了最大同IP点击数, IP总数, 平均每IP点击数, IP点击的熵, IP点击的方差等特征.
+		3. 对Agent, Country, Campaign ID等其他属性也做了类似的工作来抽取特征.
+		4. 最终一共生成了41个特征, 完整列表在http://www.dnagroup.org/PDF/FDMA12_TeamMasdar_AppendixA.pdf.
+	2. 特征选择: 作者使用了Principal Component Analysis (PCA), Common Spatial Patterns (CSP), 以及wrapper subset evaluation做特征选择. 经过对比测试, 第三种方法相对前两种要好. (但是实际上特征选择没有真正发挥作用, 后面有讲到.)
+	3. 方法使用: 作者尝试了决策树, 回归树, 神经网络, 还有SVM. 每个方法都使用了不同的learning algorithm. 经过分析, 发现决策树算法是最好的. (正好决策树的结果也是最好解释了, 正好适用于反作弊系统)
+
 * [Hybrid Models for Click Fraud Detection in Mobile Advertising](http://research.larc.smu.edu.sg/fdma2012/doc/ThirdWinner-DB2-Paper.pdf) by Chen Wei et al. International Workshop on Fraud Detection in Mobile Advertising (FDMA) 2012.
 * [Random Forests for the Detection of Click Fraud in Online Mobile Advertising](http://research.larc.smu.edu.sg/fdma2012/doc/FirstRunnerUp-Tea-Paper.pdf) by Daniel Berrar et al. International Workshop on Fraud Detection in Mobile Advertising (FDMA) 2012.
 * [Hierarchical Committee Machines for Fraud Detection in Mobile Advertising](http://research.larc.smu.edu.sg/fdma2012/doc/SecondRunnerUp-Kites-Paper.pdf) by S. Shivashankar et al. International Workshop on Fraud Detection in Mobile Advertising (FDMA) 2012.
